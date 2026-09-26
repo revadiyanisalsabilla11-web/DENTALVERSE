@@ -1,0 +1,11 @@
+{
+  "name": "DENTALVERSE – Dental Adventure for Kids",
+  "description": "Petualangan seru dunia kesehatan gigi dan mulut interaktif untuk anak usia 6–12 tahun dengan Smart Brush Cam, 3D Brushing Lab, dan mini-games edukatif.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
