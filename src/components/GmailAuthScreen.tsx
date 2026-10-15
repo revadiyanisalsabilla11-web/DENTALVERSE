@@ -3,14 +3,16 @@ import { useGame } from '../context/GameContext';
 import { UserRole } from '../types/dentalverse';
 import { 
   ShieldCheck, Sparkles, CheckCircle2, User, Key, 
-  ArrowRight, Heart, Award, Database, School, HelpCircle, Lock
+  ArrowRight, Heart, Award, Database, School, HelpCircle, Lock,
+  Rocket, Star, Eye
 } from 'lucide-react';
 import { playClickSfx } from '../utils/audio';
 
 export const GmailAuthScreen: React.FC = () => {
-  const { loginWithGoogle, allUsers, soundEnabled } = useGame();
+  const { loginWithGoogle, soundEnabled } = useGame();
 
   const [activeTab, setActiveTab] = useState<'quick' | 'custom'>('quick');
+  const [selected3DPreview, setSelected3DPreview] = useState<number>(0);
 
   // Custom Gmail form state
   const [customEmail, setCustomEmail] = useState('');
@@ -22,15 +24,42 @@ export const GmailAuthScreen: React.FC = () => {
   const [formError, setFormError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Quick Preset Accounts
+  // 3D Space Images Showcase
+  const space3DGallery = [
+    {
+      title: 'Astronot Gigi Juara 3D',
+      subtitle: 'Dental Buddy pelindung enamel di luar angkasa',
+      image: '/src/assets/images/dental_space_hero_1792076219545.jpg',
+      badge: '🚀 Maskot Kosmik',
+      accent: 'border-amber-400 bg-amber-400/20 text-amber-300'
+    },
+    {
+      title: 'Galaksi Gigi & Roket Sikat',
+      subtitle: 'Menjelajahi kosmos planet geraham & bintang',
+      image: '/src/assets/images/dental_space_galaxy_1792076218171.jpg',
+      badge: '🌌 Dunia Galaksi',
+      accent: 'border-sky-400 bg-sky-400/20 text-sky-300'
+    },
+    {
+      title: 'Stasiun Luar Angkasa Gigi',
+      subtitle: 'Klinik senyum orbital futuristik ramah anak',
+      image: '/src/assets/images/dental_space_station_1792076219087.jpg',
+      badge: '🛰️ Stasiun Orbital',
+      accent: 'border-pink-400 bg-pink-400/20 text-pink-300'
+    }
+  ];
+
+  // Quick Preset Accounts with Diverse COLORFUL palettes
   const presetAccounts = [
     {
       name: 'Revadiyani Salsabilla',
       email: 'revadiyanisalsabilla11@gmail.com',
       role: 'super_admin' as UserRole,
       roleBadge: 'Super Admin',
-      roleColor: 'bg-purple-100 text-purple-800 border-purple-200',
-      desc: 'Akses penuh kelola database, pengaturan hak akses, dan audit sistem.',
+      roleColor: 'bg-purple-500 text-white shadow-purple-500/30',
+      borderHover: 'hover:border-purple-500',
+      bgGrad: 'bg-gradient-to-br from-purple-50 via-white to-indigo-50/50',
+      desc: 'Akses penuh kelola database seluruh peserta, hak akses peran, dan audit sistem.',
       icon: '👑'
     },
     {
@@ -38,8 +67,10 @@ export const GmailAuthScreen: React.FC = () => {
       email: 'drg.budi.santoso@gmail.com',
       role: 'admin' as UserRole,
       roleBadge: 'Admin / Dokter Gigi',
-      roleColor: 'bg-blue-100 text-blue-800 border-blue-200',
-      desc: 'Kelola data pengguna, periksa riwayat gigi dan materi edukasi.',
+      roleColor: 'bg-sky-500 text-white shadow-sky-500/30',
+      borderHover: 'hover:border-sky-500',
+      bgGrad: 'bg-gradient-to-br from-sky-50 via-white to-blue-50/50',
+      desc: 'Kelola data pengguna, periksa riwayat gigi dan materi edukasi anak.',
       icon: '🩺'
     },
     {
@@ -47,17 +78,21 @@ export const GmailAuthScreen: React.FC = () => {
       email: 'siti.aminah.kader@gmail.com',
       role: 'kader' as UserRole,
       roleBadge: 'Kader Posyandu',
-      roleColor: 'bg-teal-100 text-teal-800 border-teal-200',
+      roleColor: 'bg-rose-500 text-white shadow-rose-500/30',
+      borderHover: 'hover:border-rose-500',
+      bgGrad: 'bg-gradient-to-br from-pink-50 via-white to-rose-50/50',
       desc: 'Mendampingi anak binaan posyandu & mencatat evaluasi sikat gigi.',
       icon: '🤝'
     },
     {
-      name: 'Alif Pratama (Anak / Siswa)',
+      name: 'Alif Pratama (Siswa / Anak)',
       email: 'alif.pratama@gmail.com',
       role: 'user' as UserRole,
       roleBadge: 'Pengguna / Siswa',
-      roleColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-      desc: 'Membaca modul bertahap, praktek Brush Cam, dan kuis senyum.',
+      roleColor: 'bg-amber-500 text-white shadow-amber-500/30',
+      borderHover: 'hover:border-amber-500',
+      bgGrad: 'bg-gradient-to-br from-amber-50 via-white to-yellow-50/50',
+      desc: 'Membaca modul bertahap, praktek Brush Cam, dan kuis senyum sehat.',
       icon: '🧒'
     },
     {
@@ -65,7 +100,9 @@ export const GmailAuthScreen: React.FC = () => {
       email: 'dinkes.evaluator@gmail.com',
       role: 'viewer' as UserRole,
       roleBadge: 'Viewer / Pemantau',
-      roleColor: 'bg-amber-100 text-amber-800 border-amber-200',
+      roleColor: 'bg-indigo-600 text-white shadow-indigo-500/30',
+      borderHover: 'hover:border-indigo-500',
+      bgGrad: 'bg-gradient-to-br from-indigo-50 via-white to-violet-50/50',
       desc: 'Hanya melihat rekapitulasi data & laporan grafik N-Gain tanpa izin edit.',
       icon: '📊'
     }
@@ -76,7 +113,7 @@ export const GmailAuthScreen: React.FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       loginWithGoogle(acc.email, acc.name, acc.role);
-    }, 400);
+    }, 350);
   };
 
   const handleCustomSubmit = (e: React.FormEvent) => {
@@ -104,112 +141,137 @@ export const GmailAuthScreen: React.FC = () => {
         schoolGrade: customGrade,
         region: customRegion
       });
-    }, 450);
+    }, 400);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-teal-50/60 to-amber-50/40 flex flex-col justify-between p-4 sm:p-6 lg:p-8 font-sans selection:bg-teal-200 selection:text-teal-900">
+    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-pink-50 to-amber-100/60 flex flex-col justify-between p-3 sm:p-6 lg:p-8 font-sans selection:bg-pink-300 selection:text-pink-900">
       
-      {/* Top Simple Brand Bar */}
-      <header className="max-w-5xl mx-auto w-full flex items-center justify-between py-2">
-        <div className="flex items-center gap-2.5">
-          <span className="text-3xl animate-bounce">🦷</span>
+      {/* Top Brand Bar */}
+      <header className="max-w-6xl mx-auto w-full flex items-center justify-between py-2 mb-3">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl sm:text-4xl transform hover:rotate-12 transition-transform">🦷</span>
           <div>
-            <h1 className="text-xl sm:text-2xl font-black font-display tracking-tight bg-gradient-to-r from-sky-600 via-teal-500 to-emerald-500 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl font-black font-display tracking-tight bg-gradient-to-r from-sky-500 via-pink-500 to-amber-500 bg-clip-text text-transparent">
               DENTALVERSE
             </h1>
-            <span className="text-[10px] font-bold text-teal-700 tracking-wider">
-              DENTAL ADVENTURE FOR KIDS
+            <span className="text-[11px] font-black tracking-wider text-purple-700">
+              PETUALANGAN LUAR ANGKASA GIGI ANAK
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-bold text-slate-500 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
-          <Lock className="w-3.5 h-3.5 text-teal-600" />
+        <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-pink-200 shadow-sm">
+          <Lock className="w-3.5 h-3.5 text-pink-500" />
           <span>Autentikasi Terproteksi Gmail</span>
         </div>
       </header>
 
-      {/* Main Authentication Container */}
-      <main className="max-w-4xl mx-auto w-full my-auto py-6">
-        <div className="bg-white rounded-3xl sm:rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden">
+      {/* Main Container */}
+      <main className="max-w-6xl mx-auto w-full my-auto py-2">
+        
+        {/* PROMINENT 3D SPACE CARTOON SHOWCASE BANNER (Immediately visible on page open!) */}
+        <section className="mb-6 rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-950 relative">
           
-          {/* Top Banner Notice */}
-          <div className="bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 p-6 sm:p-8 text-white relative overflow-hidden">
-            <div className="absolute right-0 top-0 translate-x-8 -translate-y-6 opacity-15 pointer-events-none text-9xl">
-              🦷
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[320px]">
+            
+            {/* Big 3D Image Display */}
+            <div className="lg:col-span-7 relative overflow-hidden flex items-center justify-center bg-black min-h-[260px] sm:min-h-[340px]">
+              <img
+                src={space3DGallery[selected3DPreview].image}
+                alt={space3DGallery[selected3DPreview].title}
+                className="w-full h-full object-cover transition-all duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-slate-950" />
+              
+              {/* Floating Badge */}
+              <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                <span className={`px-3 py-1 rounded-full text-xs font-black backdrop-blur-md border ${space3DGallery[selected3DPreview].accent}`}>
+                  {space3DGallery[selected3DPreview].badge}
+                </span>
+                <span className="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold">
+                  Karakter 3D Resmi
+                </span>
+              </div>
             </div>
 
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="max-w-xl">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-bold tracking-wide uppercase mb-3 text-white border border-white/20">
+            {/* Showcase Info & Selector */}
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between text-white bg-gradient-to-br from-slate-950 via-purple-950 to-indigo-950">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-300 text-xs font-bold mb-3">
                   <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
-                  Gerbang Masuk Petualangan Kosmik Gigi
-                </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display leading-tight mb-2">
-                  Masuk dengan Akun Gmail
+                  <span>Dunia 3D Kartun DENTALVERSE</span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl font-black font-display leading-tight mb-2 text-white">
+                  {space3DGallery[selected3DPreview].title}
                 </h2>
-                <p className="text-xs sm:text-sm text-sky-50 font-medium leading-relaxed">
-                  Menjaga riwayat belajar bertahap, skor kuis evaluasi, rekaman Brush Cam, dan sertifikat rapor anak agar tersimpan aman di akun Google Anda.
+                <p className="text-xs sm:text-sm text-sky-200/90 font-medium leading-relaxed mb-6">
+                  {space3DGallery[selected3DPreview].subtitle}. Masuk dengan akun Gmail untuk menjelajahi modul bertahap, berlatih dengan Brush Cam, dan kumpulkan skor kuis senyum sehatmu!
                 </p>
               </div>
 
-              {/* 3D Tooth Astronaut Space Mascot */}
-              <div className="shrink-0 hidden sm:flex items-center gap-3 bg-white/10 backdrop-blur-md p-2 pr-4 rounded-3xl border border-white/20 shadow-lg">
-                <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-amber-300 shadow-md">
-                  <img
-                    src="/src/assets/images/dental_space_hero_1792076219545.jpg"
-                    alt="Tooth Astronaut"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider block">
-                    Dental Buddy Kosmik
-                  </span>
-                  <span className="text-xs font-black text-white block">
-                    Astronot Senyum 🚀
-                  </span>
-                  <span className="text-[10px] text-teal-200">
-                    Siap Memandu!
-                  </span>
+              {/* 3 Interactive Thumbnail Switches */}
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                  Pilih Galeri 3D Luar Angkasa:
+                </span>
+                <div className="grid grid-cols-3 gap-2">
+                  {space3DGallery.map((item, idx) => (
+                    <button
+                      key={item.title}
+                      type="button"
+                      onClick={() => setSelected3DPreview(idx)}
+                      className={`group relative rounded-xl overflow-hidden border-2 transition-all p-0.5 text-left aspect-video ${
+                        selected3DPreview === idx
+                          ? 'border-amber-400 ring-2 ring-amber-400/50 scale-105'
+                          : 'border-white/20 opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover rounded-lg" />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent" />
+                      <span className="absolute bottom-1 left-1 right-1 text-[8px] font-bold text-white truncate drop-shadow">
+                        {item.title}
+                      </span>
+                    </button>
+                  ))}
                 </div>
               </div>
+
             </div>
 
-            {/* 3 Value Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/20">
-              <div className="flex items-center gap-2.5 text-xs text-sky-100 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
-                <span>Skor Kuis & Rapor Tersimpan</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-sky-100 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
-                <span>Progres Modul Bertahap</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-sky-100 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
-                <span>Pengaturan Hak Akses (RBAC)</span>
-              </div>
-            </div>
           </div>
 
-          {/* Form / Quick Tabs */}
-          <div className="p-6 sm:p-8">
-            <div className="flex items-center justify-center p-1 bg-slate-100 rounded-2xl max-w-md mx-auto mb-6">
+        </section>
+
+        {/* AUTHENTICATION ACTION CARD (Vibrant Colorful UI) */}
+        <div className="bg-white rounded-3xl shadow-xl border-2 border-pink-100 overflow-hidden">
+          
+          {/* Colorful Header Strip */}
+          <div className="bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500 p-5 sm:p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl sm:text-2xl font-black font-display">
+                Masuk dengan Akun Gmail Anda
+              </h3>
+              <p className="text-xs text-pink-100 font-medium mt-0.5">
+                Riwayat belajar modul bertahap, skor kuis, sertifikat rapor, dan rekaman sikat gigi tersimpan otomatis.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 p-1 bg-white/20 backdrop-blur-md rounded-2xl shrink-0">
               <button
                 type="button"
                 onClick={() => {
                   playClickSfx(!soundEnabled);
                   setActiveTab('quick');
                 }}
-                className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`py-1.5 px-4 rounded-xl text-xs font-bold transition-all ${
                   activeTab === 'quick'
-                    ? 'bg-white text-slate-800 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-purple-700 shadow-md font-black'
+                    : 'text-white hover:bg-white/10'
                 }`}
               >
-                ⚡ Akun Siap Pakai (1-Klik)
+                ⚡ Akun Siap Pakai
               </button>
               <button
                 type="button"
@@ -217,26 +279,30 @@ export const GmailAuthScreen: React.FC = () => {
                   playClickSfx(!soundEnabled);
                   setActiveTab('custom');
                 }}
-                className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`py-1.5 px-4 rounded-xl text-xs font-bold transition-all ${
                   activeTab === 'custom'
-                    ? 'bg-white text-slate-800 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-pink-700 shadow-md font-black'
+                    : 'text-white hover:bg-white/10'
                 }`}
               >
-                ✉️ Masuk Pakai Gmail Baru / Sendiri
+                ✉️ Pakai Gmail Sendiri
               </button>
             </div>
+          </div>
 
-            {/* TAB 1: QUICK 1-CLICK PROFILES */}
+          {/* TAB CONTENT */}
+          <div className="p-5 sm:p-7">
+            
+            {/* TAB 1: QUICK PROFILES WITH RICH DIVERSE COLORS */}
             {activeTab === 'quick' && (
               <div>
-                <div className="text-center max-w-xl mx-auto mb-6">
-                  <h3 className="text-base font-bold text-slate-800">
-                    Pilih Akun Gmail untuk Langsung Masuk:
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Klik salah satu akun di bawah untuk mencoba fitur sesuai peran hak akses masing-masing.
-                  </p>
+                <div className="text-center max-w-xl mx-auto mb-5">
+                  <span className="text-xs font-bold text-purple-700 uppercase tracking-wider block mb-0.5">
+                    1-Klik Akses Langsung
+                  </span>
+                  <h4 className="text-base font-bold text-slate-800">
+                    Pilih Peran Uji Coba untuk Langsung Menjelajah:
+                  </h4>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -245,19 +311,21 @@ export const GmailAuthScreen: React.FC = () => {
                       key={acc.email}
                       disabled={isLoading}
                       onClick={() => handleQuickLogin(acc)}
-                      className="group text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-white hover:bg-teal-50/30 transition-all duration-200 shadow-xs hover:shadow-md hover:-translate-y-0.5 flex flex-col justify-between relative overflow-hidden"
+                      className={`group text-left p-4 rounded-2xl border-2 border-slate-200/90 ${acc.borderHover} ${acc.bgGrad} hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between relative overflow-hidden cursor-pointer`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-2">
-                          <span className="text-2xl">{acc.icon}</span>
-                          <span className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${acc.roleColor}`}>
+                          <span className="text-3xl transform group-hover:scale-110 transition-transform">
+                            {acc.icon}
+                          </span>
+                          <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-xs ${acc.roleColor}`}>
                             {acc.roleBadge}
                           </span>
                         </div>
 
-                        <h4 className="text-sm font-bold text-slate-800 group-hover:text-teal-700 transition-colors">
+                        <h5 className="text-sm font-bold text-slate-900 group-hover:text-purple-700 transition-colors">
                           {acc.name}
-                        </h4>
+                        </h5>
                         <p className="text-[11px] font-mono text-slate-400 truncate mb-2">
                           {acc.email}
                         </p>
@@ -266,16 +334,16 @@ export const GmailAuthScreen: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-teal-600">
-                        <span>Masuk sebagai ini</span>
+                      <div className="mt-4 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-xs font-black text-purple-600 group-hover:text-pink-600 transition-colors">
+                        <span>Masuk sebagai ini ➔</span>
                         <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                       </div>
                     </button>
                   ))}
 
-                  {/* Official Google Button Card */}
-                  <div className="p-4 rounded-2xl border-2 border-dashed border-sky-300 bg-sky-50/50 flex flex-col justify-center items-center text-center">
-                    <svg className="w-8 h-8 mb-2" viewBox="0 0 24 24">
+                  {/* Official Google Card with Bright Colors */}
+                  <div className="p-4 rounded-2xl border-2 border-dashed border-sky-300 bg-gradient-to-br from-sky-50 via-white to-amber-50 flex flex-col justify-center items-center text-center">
+                    <svg className="w-8 h-8 mb-2 drop-shadow" viewBox="0 0 24 24">
                       <path
                         fill="#4285F4"
                         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -293,35 +361,35 @@ export const GmailAuthScreen: React.FC = () => {
                         d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
                       />
                     </svg>
-                    <span className="text-xs font-bold text-slate-800 mb-1">
-                      Login Google Default
+                    <span className="text-xs font-black text-slate-800 mb-1">
+                      Akun Super Admin Utama
                     </span>
                     <button
                       disabled={isLoading}
                       onClick={() => handleQuickLogin(presetAccounts[0])}
-                      className="mt-2 w-full py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-sm transition-all"
+                      className="mt-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
                     >
-                      {isLoading ? 'Menghubungkan...' : 'Lanjutkan Akun Utama'}
+                      {isLoading ? 'Menghubungkan...' : 'Lanjutkan Akun Utama 🚀'}
                     </button>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* TAB 2: CUSTOM GMAIL FORM */}
+            {/* TAB 2: CUSTOM GMAIL FORM (Vibrant input cards) */}
             {activeTab === 'custom' && (
               <form onSubmit={handleCustomSubmit} className="max-w-xl mx-auto space-y-4">
                 <div className="text-center mb-4">
-                  <h3 className="text-base font-bold text-slate-800">
-                    Gunakan Alamat Email Gmail Anda
-                  </h3>
+                  <h4 className="text-base font-bold text-slate-800">
+                    Daftar / Masuk dengan Alamat Gmail Pribadi
+                  </h4>
                   <p className="text-xs text-slate-500 mt-1">
-                    Jika email sudah pernah digunakan, seluruh progres belajar sebelumnya akan dimuat kembali secara otomatis.
+                    Seluruh progres modul dan skor kuis akan otomatis disimpan ke alamat email ini.
                   </p>
                 </div>
 
                 {formError && (
-                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs font-bold text-rose-700">
+                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-300 text-xs font-bold text-rose-700">
                     {formError}
                   </div>
                 )}
@@ -337,9 +405,9 @@ export const GmailAuthScreen: React.FC = () => {
                       placeholder="contoh: nama.kamu@gmail.com"
                       value={customEmail}
                       onChange={(e) => setCustomEmail(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder:text-slate-400"
+                      className="w-full px-4 py-2.5 rounded-xl border-2 border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
                     />
-                    <span className="absolute right-3 top-2.5 text-xs font-bold text-slate-400">
+                    <span className="absolute right-3 top-2.5 text-xs font-bold text-pink-500">
                       @gmail.com
                     </span>
                   </div>
@@ -355,7 +423,7 @@ export const GmailAuthScreen: React.FC = () => {
                       placeholder="contoh: Bintang Pratama"
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder:text-slate-400"
+                      className="w-full px-4 py-2.5 rounded-xl border-2 border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-purple-500"
                     />
                   </div>
 
@@ -366,7 +434,7 @@ export const GmailAuthScreen: React.FC = () => {
                     <select
                       value={customRole}
                       onChange={(e) => setCustomRole(e.target.value as UserRole)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"
+                      className="w-full px-3 py-2.5 rounded-xl border-2 border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-purple-500 bg-white"
                     >
                       <option value="user">🧒 Pengguna / Anak (Siswa)</option>
                       <option value="kader">🤝 Kader Posyandu Pendamping</option>
@@ -388,7 +456,7 @@ export const GmailAuthScreen: React.FC = () => {
                       max={60}
                       value={customAge}
                       onChange={(e) => setCustomAge(parseInt(e.target.value) || 8)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2.5 rounded-xl border-2 border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -401,7 +469,7 @@ export const GmailAuthScreen: React.FC = () => {
                       placeholder="contoh: Kelas 4 SD"
                       value={customGrade}
                       onChange={(e) => setCustomGrade(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2.5 rounded-xl border-2 border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -414,7 +482,7 @@ export const GmailAuthScreen: React.FC = () => {
                       placeholder="contoh: Posyandu Dahlia"
                       value={customRegion}
                       onChange={(e) => setCustomRegion(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2.5 rounded-xl border-2 border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
@@ -423,13 +491,13 @@ export const GmailAuthScreen: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 px-6 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 hover:opacity-95 text-white font-bold text-sm shadow-lg shadow-pink-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     {isLoading ? (
                       <span>Memproses Autentikasi...</span>
                     ) : (
                       <>
-                        <span>🚀 Masuk Sekarang & Sinkronkan Data</span>
+                        <span>🚀 Masuk Sekarang & Simpan ke Akun Ini</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -440,21 +508,22 @@ export const GmailAuthScreen: React.FC = () => {
 
           </div>
 
-          {/* Bottom Security Assurance */}
-          <div className="bg-slate-50 border-t border-slate-200 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+          {/* Bottom Security Info */}
+          <div className="bg-slate-50 border-t border-slate-200 px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-teal-600" />
-              <span>Privasi data kesehatan anak terjaga aman sesuai standar edukasi.</span>
+              <ShieldCheck className="w-4 h-4 text-purple-600" />
+              <span>Autentikasi akun melindungi data belajar anak & evaluasi riset posyandu.</span>
             </div>
-            <span>DENTALVERSE · Dental Adventure for Kids</span>
+            <span className="font-bold text-purple-700">DENTALVERSE · Dental Adventure for Kids</span>
           </div>
 
         </div>
+
       </main>
 
-      {/* Footer info */}
-      <footer className="text-center text-xs text-slate-400 py-2">
-        Aplikasi Edukasi Kesehatan Gigi Anak Indonesia dengan Integrasi Autentikasi Gmail
+      {/* Footer */}
+      <footer className="text-center text-xs text-slate-500 py-2">
+        Aplikasi Edukasi Kesehatan Gigi Anak Indonesia dengan Visual 3D Luar Angkasa & Autentikasi Gmail
       </footer>
 
     </div>

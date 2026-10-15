@@ -197,13 +197,13 @@ export const LearningModulesView: React.FC = () => {
 
             <button
               onClick={handleFinishCurrent}
-              className={`w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 ${
+              className={`w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
                 isCompleted
                   ? 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                  : 'bg-teal-600 hover:bg-teal-700 text-white active:scale-95'
+                  : 'bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:opacity-95 text-white active:scale-95 shadow-purple-500/25'
               }`}
             >
-              <span>{isCompleted ? 'Selesai (Pelajari Lagi)' : 'Tandai Selesai & Lanjut (+60 XP)'}</span>
+              <span>{isCompleted ? 'Selesai (Pelajari Lagi)' : 'Tandai Selesai & Lanjut (+60 XP) 🚀'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -213,9 +213,29 @@ export const LearningModulesView: React.FC = () => {
         {/* Sidebar Roadmap & Quiz Gate (Col 4) */}
         <div className="lg:col-span-4 space-y-5">
           
-          {/* Quiz Gate Card */}
-          <div className="bg-white rounded-3xl p-6 shadow-xl border-2 border-amber-200 text-center">
-            <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-3xl">
+          {/* 3D Cosmic Space Companion Card */}
+          <div className="rounded-3xl p-5 shadow-xl border-2 border-purple-300 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-amber-400 shrink-0 shadow-md">
+                <img
+                  src="/src/assets/images/dental_space_hero_1792076219545.jpg"
+                  alt="Astronot Gigi"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 block">
+                  Pendamping Kosmik
+                </span>
+                <h5 className="font-bold text-sm text-white">Astronot Dental Buddy</h5>
+                <p className="text-[11px] text-purple-200">"Setiap modul membuat senyummu makin bersinar di galaksi!"</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Quiz Gate Card (Golden Sunny Orange) */}
+          <div className="bg-gradient-to-br from-amber-50/60 via-white to-orange-50/40 rounded-3xl p-6 shadow-xl border-2 border-amber-300 text-center">
+            <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-3xl shadow-sm">
               🧠
             </div>
             <h4 className="text-lg font-bold font-display text-slate-800 mb-1">
@@ -229,9 +249,9 @@ export const LearningModulesView: React.FC = () => {
 
             <button
               onClick={() => setCurrentTab('quiz')}
-              className={`w-full py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all ${
+              className={`w-full py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer ${
                 completedModules.length >= 2
-                  ? 'bg-amber-400 hover:bg-amber-500 text-slate-900'
+                  ? 'bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-slate-950 font-black'
                   : 'bg-slate-100 text-slate-400 cursor-not-allowed'
               }`}
             >
@@ -239,9 +259,9 @@ export const LearningModulesView: React.FC = () => {
             </button>
           </div>
 
-          {/* Quick Brush Cam Practice Card */}
-          <div className="bg-white rounded-3xl p-6 shadow-xl border-2 border-teal-200 text-center">
-            <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-3xl">
+          {/* Quick Brush Cam Practice Card (Electric Sky Blue) */}
+          <div className="bg-gradient-to-br from-sky-50/60 via-white to-blue-50/40 rounded-3xl p-6 shadow-xl border-2 border-sky-300 text-center">
+            <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-3xl shadow-sm">
               📷
             </div>
             <h4 className="text-lg font-bold font-display text-slate-800 mb-1">
@@ -252,7 +272,7 @@ export const LearningModulesView: React.FC = () => {
             </p>
             <button
               onClick={() => setCurrentTab('brush-cam')}
-              className="w-full py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-sky-500/25 transition-all cursor-pointer"
             >
               Buka Brush Cam 🎥
             </button>

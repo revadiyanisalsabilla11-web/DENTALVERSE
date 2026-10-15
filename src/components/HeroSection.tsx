@@ -57,74 +57,74 @@ export const HeroSection: React.FC = () => {
           
           {/* Left Column: Headlines & Primary Pathways */}
           <div className="lg:col-span-7 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white shadow-xs border border-sky-100 mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white shadow-xs border border-pink-200 mb-4">
               <span className="text-base animate-spin">✨</span>
-              <span className="text-xs sm:text-sm font-bold text-sky-800 tracking-wide uppercase">
-                DENTALVERSE · Dental Adventure for Kids
+              <span className="text-xs sm:text-sm font-black text-purple-800 tracking-wide uppercase">
+                DENTALVERSE · Petualangan Kosmik Gigi
               </span>
-              <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-teal-100 text-teal-800">
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-900">
                 Usia 6–12 Tahun
               </span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-slate-900 tracking-tight leading-[1.15] mb-4">
               Petualangan Digital Menuju{' '}
-              <span className="bg-gradient-to-r from-sky-600 via-teal-500 to-emerald-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sky-500 via-pink-500 to-amber-500 bg-clip-text text-transparent">
                 Senyum Sehat Juara!
               </span>
             </h1>
 
             <p className="text-sm sm:text-base text-slate-600 font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed mb-6">
-              Belajar kesehatan gigi secara bertahap, sikat gigi dipantau kamera berdampingan tutorial animasi, dan cetak rapor hasil belajarmu!
+              Jelajahi galaksi kesehatan gigi bersama astronot gigi 3D, ikuti kurikulum modul bertahap, sikat gigi dipandu kamera real-time, dan unduh rapor senyummu!
             </p>
 
-            {/* Quick Action Buttons */}
+            {/* Colorful Quick Action Buttons */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6">
               <button
                 onClick={() => handleAction('learning-modules')}
-                className="group flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="group flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-500/30 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer"
               >
-                <BookOpen className="w-5 h-5 text-amber-200" />
+                <BookOpen className="w-5 h-5 text-amber-300" />
                 <span>MULAI BELAJAR BERTAHAP</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 onClick={() => handleAction('brush-cam')}
-                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white border-2 border-sky-300 hover:border-sky-400 text-slate-800 font-bold text-sm shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold text-sm shadow-md shadow-sky-500/25 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer"
               >
-                <Camera className="w-5 h-5 text-sky-600" />
+                <Camera className="w-5 h-5 text-sky-200" />
                 <span>BUKA BRUSH CAM 🎥</span>
               </button>
 
               <button
                 onClick={() => handleAction('my-report')}
-                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white border-2 border-amber-300 hover:border-amber-400 text-slate-800 font-bold text-sm shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-sm shadow-md shadow-pink-500/25 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer"
               >
-                <FileText className="w-5 h-5 text-amber-600" />
+                <FileText className="w-5 h-5 text-pink-200" />
                 <span>RAPOR SAYA 📄</span>
               </button>
             </div>
 
-            {/* User Hero Metric Chips */}
+            {/* User Hero Metric Chips in Diverse Vibrant Colors */}
             <div className="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 pt-3 border-t border-slate-200/80 text-center sm:text-left">
-              <div className="bg-white/80 p-2.5 rounded-2xl border border-slate-200">
-                <span className="text-[10px] text-slate-400 font-bold uppercase block">Modul Selesai</span>
-                <span className="text-base font-black text-teal-600 tabular-nums">
+              <div className="bg-purple-50/80 p-2.5 rounded-2xl border border-purple-200 shadow-xs">
+                <span className="text-[10px] text-purple-700 font-bold uppercase block">Modul Selesai</span>
+                <span className="text-base font-black text-purple-800 tabular-nums">
                   {completedModules.length} / 5 Modul
                 </span>
               </div>
 
-              <div className="bg-white/80 p-2.5 rounded-2xl border border-slate-200">
-                <span className="text-[10px] text-slate-400 font-bold uppercase block">Skor Post-Test</span>
-                <span className="text-base font-black text-amber-500 tabular-nums">
+              <div className="bg-amber-50/80 p-2.5 rounded-2xl border border-amber-200 shadow-xs">
+                <span className="text-[10px] text-amber-700 font-bold uppercase block">Skor Post-Test</span>
+                <span className="text-base font-black text-amber-600 tabular-nums">
                   {currentUser.postTestScore} / 100
                 </span>
               </div>
 
-              <div className="bg-white/80 p-2.5 rounded-2xl border border-slate-200">
-                <span className="text-[10px] text-slate-400 font-bold uppercase block">Poin Petualang</span>
-                <span className="text-base font-black text-sky-600 tabular-nums">
+              <div className="bg-sky-50/80 p-2.5 rounded-2xl border border-sky-200 shadow-xs">
+                <span className="text-[10px] text-sky-700 font-bold uppercase block">Poin Petualang</span>
+                <span className="text-base font-black text-sky-700 tabular-nums">
                   {xp} XP ⭐
                 </span>
               </div>

@@ -62,41 +62,41 @@ const HomeDashboard: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           
-          {/* Card 1: Modul Bertahap */}
+          {/* Card 1: Modul Bertahap (Purple/Violet Theme) */}
           <div
             onClick={() => handleNav('learning-modules')}
-            className="group bg-white rounded-3xl p-6 border-2 border-slate-200/80 hover:border-teal-400 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+            className="group bg-gradient-to-br from-purple-50/70 via-white to-indigo-50/40 rounded-3xl p-6 border-2 border-purple-200/90 hover:border-purple-500 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-400 to-emerald-500 text-white flex items-center justify-center text-3xl shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center text-3xl shadow-md shadow-purple-500/25 mb-4 group-hover:scale-110 transition-transform">
                 📚
               </div>
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200 mb-2 inline-block">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200 mb-2 inline-block">
                 Tahap Demi Tahap
               </span>
-              <h3 className="text-lg font-bold font-display text-slate-900 group-hover:text-teal-600 transition-colors mb-1.5">
+              <h3 className="text-lg font-bold font-display text-slate-900 group-hover:text-purple-600 transition-colors mb-1.5">
                 Modul Bertahap
               </h3>
               <p className="text-xs text-slate-600 font-medium leading-relaxed mb-4">
                 Pelajari 5 kurikulum gigi berurutan mulai dari anatomi hingga klinik ramah anak.
               </p>
             </div>
-            <div className="flex items-center justify-between text-xs font-bold text-teal-600 pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-between text-xs font-black text-purple-600 pt-3 border-t border-purple-100">
               <span>{completedModules.length} / 5 Selesai</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
-          {/* Card 2: Brush Cam Dual Screen */}
+          {/* Card 2: Brush Cam Dual Screen (Electric Sky Blue Theme) */}
           <div
             onClick={() => handleNav('brush-cam')}
-            className="group bg-white rounded-3xl p-6 border-2 border-slate-200/80 hover:border-sky-400 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+            className="group bg-gradient-to-br from-sky-50/70 via-white to-blue-50/40 rounded-3xl p-6 border-2 border-sky-200/90 hover:border-sky-500 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-indigo-500 text-white flex items-center justify-center text-3xl shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-3xl shadow-md shadow-sky-500/25 mb-4 group-hover:scale-110 transition-transform">
                 🎥
               </div>
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200 mb-2 inline-block">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 border border-sky-200 mb-2 inline-block">
                 Open Cam + Tutorial
               </span>
               <h3 className="text-lg font-bold font-display text-slate-900 group-hover:text-sky-600 transition-colors mb-1.5">
@@ -106,22 +106,22 @@ const HomeDashboard: React.FC = () => {
                 Buka kamera sambil menyimak tutorial bergerak berdampingan untuk menyikat 4 area gigi.
               </p>
             </div>
-            <div className="flex items-center justify-between text-xs font-bold text-sky-600 pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-between text-xs font-black text-sky-600 pt-3 border-t border-sky-100">
               <span>Mulai Sesi Praktek</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
-          {/* Card 3: Kuis Evaluasi */}
+          {/* Card 3: Kuis Evaluasi (Sunny Amber / Golden Orange Theme) */}
           <div
             onClick={() => handleNav('quiz')}
-            className="group bg-white rounded-3xl p-6 border-2 border-slate-200/80 hover:border-amber-400 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+            className="group bg-gradient-to-br from-amber-50/70 via-white to-yellow-50/40 rounded-3xl p-6 border-2 border-amber-200/90 hover:border-amber-500 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-slate-900 flex items-center justify-center text-3xl shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center text-3xl shadow-md shadow-amber-500/25 mb-4 group-hover:scale-110 transition-transform">
                 🧠
               </div>
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 mb-2 inline-block">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200 mb-2 inline-block">
                 Uji Pemahaman
               </span>
               <h3 className="text-lg font-bold font-display text-slate-900 group-hover:text-amber-600 transition-colors mb-1.5">
@@ -131,34 +131,140 @@ const HomeDashboard: React.FC = () => {
                 Kerjakan post-test evaluasi untuk mengukur peningkatan pengetahuan gigimu.
               </p>
             </div>
-            <div className="flex items-center justify-between text-xs font-bold text-amber-700 pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-between text-xs font-black text-amber-600 pt-3 border-t border-amber-100">
               <span>Nilai: {currentUser.postTestScore}/100</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
-          {/* Card 4: Rapor & Hasil Belajar */}
+          {/* Card 4: Rapor & Hasil Belajar (Sweet Strawberry Pink Theme) */}
           <div
             onClick={() => handleNav('my-report')}
-            className="group bg-white rounded-3xl p-6 border-2 border-slate-200/80 hover:border-emerald-400 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+            className="group bg-gradient-to-br from-pink-50/70 via-white to-rose-50/40 rounded-3xl p-6 border-2 border-pink-200/90 hover:border-pink-500 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 text-white flex items-center justify-center text-3xl shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 text-white flex items-center justify-center text-3xl shadow-md shadow-pink-500/25 mb-4 group-hover:scale-110 transition-transform">
                 📄
               </div>
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 mb-2 inline-block">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-800 border border-pink-200 mb-2 inline-block">
                 Cetak & Unduh File
               </span>
-              <h3 className="text-lg font-bold font-display text-slate-900 group-hover:text-emerald-600 transition-colors mb-1.5">
+              <h3 className="text-lg font-bold font-display text-slate-900 group-hover:text-pink-600 transition-colors mb-1.5">
                 Rapor & Rekomendasi
               </h3>
               <p className="text-xs text-slate-600 font-medium leading-relaxed mb-4">
                 Lihat evaluasi lengkap, rekomendasi tindak lanjut, dan cetak sertifikat capaian.
               </p>
             </div>
-            <div className="flex items-center justify-between text-xs font-bold text-emerald-600 pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-between text-xs font-black text-pink-600 pt-3 border-t border-pink-100">
               <span>Cetak Laporan</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3D Dental Space Cartoon Gallery Section */}
+      <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="bg-gradient-to-r from-indigo-950 via-purple-950 to-slate-950 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border-4 border-purple-400/30 relative overflow-hidden">
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 relative z-10">
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 font-bold text-xs uppercase tracking-wider mb-2 border border-pink-400/30">
+                <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
+                Galeri Visual 3D Luar Angkasa
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black font-display text-white">
+                Dunia 3D Kartun DENTALVERSE
+              </h3>
+              <p className="text-xs sm:text-sm text-purple-200 mt-1 max-w-xl">
+                Jelajahi visual animasi 3D kartun bertema petualangan gigi luar angkasa yang dirancang khusus untuk memotivasi anak merawat senyum sehat!
+              </p>
+            </div>
+
+            <button
+              onClick={() => handleNav('brush-cam')}
+              className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs shadow-md hover:scale-105 transition-all self-start sm:self-auto cursor-pointer"
+            >
+              🎥 Buka Brush Cam Kosmik
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative z-10">
+            {/* 3D Image 1 */}
+            <div
+              onClick={() => handleNav('brush-cam')}
+              className="group bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 hover:border-amber-400 transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+            >
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src="/src/assets/images/dental_space_hero_1792076219545.jpg"
+                  alt="Maskot Astronot Gigi 3D"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] shadow-sm">
+                  🚀 Astronot Gigi
+                </span>
+              </div>
+              <div className="p-4">
+                <h4 className="font-bold text-sm text-white group-hover:text-amber-300 transition-colors">
+                  Maskot Dental Buddy Kosmik
+                </h4>
+                <p className="text-xs text-slate-300 mt-1">
+                  Karakter gigi 3D berpakaian astronot siap memandumu menyikat 4 sudut gigi di Brush Cam.
+                </p>
+              </div>
+            </div>
+
+            {/* 3D Image 2 */}
+            <div
+              onClick={() => handleNav('learning-modules')}
+              className="group bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 hover:border-sky-400 transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+            >
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src="/src/assets/images/dental_space_galaxy_1792076218171.jpg"
+                  alt="Galaksi Gigi 3D"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-sky-400 text-slate-950 font-black text-[10px] shadow-sm">
+                  🌌 Galaksi Gigi
+                </span>
+              </div>
+              <div className="p-4">
+                <h4 className="font-bold text-sm text-white group-hover:text-sky-300 transition-colors">
+                  Penjelajahan Planet Gigi
+                </h4>
+                <p className="text-xs text-slate-300 mt-1">
+                  Terbang bersama roket sikat gigi melewati nebula bersih dan planet geraham bercincin benang gigi.
+                </p>
+              </div>
+            </div>
+
+            {/* 3D Image 3 */}
+            <div
+              onClick={() => handleNav('quiz')}
+              className="group bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 hover:border-pink-400 transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+            >
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src="/src/assets/images/dental_space_station_1792076219087.jpg"
+                  alt="Stasiun Senyum Luar Angkasa 3D"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-pink-400 text-slate-950 font-black text-[10px] shadow-sm">
+                  🛰️ Stasiun Senyum
+                </span>
+              </div>
+              <div className="p-4">
+                <h4 className="font-bold text-sm text-white group-hover:text-pink-300 transition-colors">
+                  Galactic Dental Clinic
+                </h4>
+                <p className="text-xs text-slate-300 mt-1">
+                  Pusat evaluasi kuis dan sertifikat senyum sehat berbentuk gigi raksasa di luar angkasa.
+                </p>
+              </div>
             </div>
           </div>
 

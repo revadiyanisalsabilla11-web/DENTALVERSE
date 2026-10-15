@@ -57,10 +57,10 @@ export const Navbar: React.FC = () => {
         >
           <span className="text-2xl transform group-hover:rotate-12 transition-transform duration-200">🦷</span>
           <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-black font-display tracking-tight bg-gradient-to-r from-sky-600 via-teal-500 to-emerald-500 bg-clip-text text-transparent leading-none">
+            <span className="text-lg sm:text-xl font-black font-display tracking-tight bg-gradient-to-r from-sky-500 via-pink-500 to-amber-500 bg-clip-text text-transparent leading-none">
               DENTALVERSE
             </span>
-            <span className="text-[10px] font-bold text-teal-700 tracking-wider">KIDS ADVENTURE</span>
+            <span className="text-[10px] font-black text-purple-700 tracking-wider">KIDS ADVENTURE 🚀</span>
           </div>
         </button>
 
